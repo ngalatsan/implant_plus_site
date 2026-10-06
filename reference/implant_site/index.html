@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ИМПЛАНТ+ — стоматологическая клиника</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f4f2;--fg:#0a0a0a;--line:#cfcfcb;--mute:#777;--pan:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#070707;--fg:#f2f2f0;--line:#262626;--mute:#8a8a8a;--pan:#0f0f0f}}
+:root[data-theme="dark"]{--bg:#070707;--fg:#f2f2f0;--line:#262626;--mute:#8a8a8a;--pan:#0f0f0f}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--fg);font:300 16px/1.6 Manrope,system-ui,sans-serif}
+.mono{font:400 11px/1.4 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:12px;font:500 15px Unbounded,sans-serif;letter-spacing:.06em}
+.logo img{height:34px;filter:invert(1)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo img{filter:none}}
+nav{display:flex;gap:28px;align-items:center}
+nav a{color:var(--fg);text-decoration:none;font-size:13px;opacity:.65;transition:opacity .2s}nav a:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--fg);cursor:pointer;font:400 13px Manrope,sans-serif;padding:12px 22px;border-radius:999px;background:var(--fg);color:var(--bg);transition:all .25s}
+.btn:hover{background:transparent;color:var(--fg)}
+.hero{margin-top:24px;border-radius:28px;background:#000;color:#fff;position:relative;overflow:hidden;min-height:620px;padding:56px 48px 44px;display:flex;flex-direction:column;justify-content:space-between}
+.hero .bg{position:absolute;inset:0;background:url(images/IMG_20261005_164121_254.jpg) center/cover;filter:brightness(.62)}
+.hero:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#000 15%,transparent 80%),repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 4px)}
+.hero>*:not(.bg){position:relative;z-index:2}
+.hero .mono{color:#aaa}
+.hero h1{font:300 clamp(40px,8.5vw,108px)/.98 Unbounded,sans-serif;letter-spacing:-.04em;margin:20px 0 0}
+.hero h1 b{font-weight:500}
+.hero .bot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-top:60px}
+.hero p{max-width:340px;margin:0;color:#ccc;font-size:15px}
+.hero .btn{background:#fff;color:#000;border-color:#fff}.hero .btn:hover{background:transparent;color:#fff}
+.scan{position:absolute;left:0;right:0;height:2px;z-index:2;background:linear-gradient(90deg,transparent,#fff,transparent);opacity:.5;animation:sc 6s linear infinite}
+@keyframes sc{from{top:0}to{top:100%}}
+section{padding:100px 0 0}
+.head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:18px}
+h2{font:300 clamp(28px,4.6vw,48px)/1.1 Unbounded,sans-serif;letter-spacing:-.03em;margin:0}
+.svc{display:grid;grid-template-columns:60px 1fr 1.2fr 30px;align-items:center;gap:16px;padding:28px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:padding .3s}
+.svc:hover{padding-left:16px}
+.svc h3{font:400 20px Unbounded,sans-serif;margin:0;letter-spacing:-.02em}.svc span{color:var(--mute);font-size:14px}
+.svc em{font-style:normal;font-size:20px;transition:transform .3s}.svc:hover em{transform:translateX(6px)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:100px}
+.stats div{padding:34px 0 34px 24px;border-left:1px solid var(--line)}.stats div:first-child{border:0;padding-left:0}
+.stats b{display:block;font:300 clamp(30px,5vw,56px)/1.1 Unbounded,sans-serif;letter-spacing:-.04em}
+.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:32px}
+.doc{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--pan);cursor:pointer;transition:transform .35s,border-color .35s}
+.doc:hover{transform:translateY(-6px);border-color:var(--fg)}
+.doc img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;transition:transform .5s;display:block}
+
+.doc div{padding:20px 22px 24px}.doc h3{font:400 19px Unbounded,sans-serif;margin:8px 0 4px;letter-spacing:-.02em}.doc p{margin:0;color:var(--mute);font-size:14px}
+.team{margin-top:24px;border-radius:22px;width:100%;filter:grayscale(1);display:block}
+.gal{display:flex;gap:16px;overflow-x:auto;margin-top:32px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.gal img{height:420px;border-radius:18px;scroll-snap-align:start;flex:none}
+
+footer{margin-top:100px;background:#000;color:#fff;border-radius:28px 28px 0 0;padding:64px 0 28px}
+.big{font:300 clamp(30px,6vw,68px)/1.05 Unbounded,sans-serif;letter-spacing:-.04em;margin-bottom:56px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:36px}
+footer .mono{color:#888;display:block;margin-bottom:14px}
+footer a,footer .cols div div{color:#fff;text-decoration:none;display:block;margin:5px 0}footer a:hover{text-decoration:underline}
+.copy{margin-top:48px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:20;padding:20px}
+.modal.open{display:flex}
+.box{background:var(--bg);border:1px solid var(--line);border-radius:24px;padding:34px;width:100%;max-width:410px;position:relative}
+.box h3{font:300 26px Unbounded,sans-serif;letter-spacing:-.03em;margin:10px 0 22px}
+.box input,.box select{width:100%;padding:14px 4px;margin-bottom:10px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--fg);font:inherit;outline:0;border-radius:0}
+.box input:focus,.box select:focus{border-color:var(--fg)}
+.box select option{color:#000}
+.box .btn{width:100%;justify-content:center;margin-top:14px}
+.x{position:absolute;right:20px;top:14px;background:none;border:0;font-size:26px;font-weight:200;color:var(--fg);cursor:pointer}
+.tabs{display:flex;gap:6px;margin-bottom:18px}
+.tabs button{flex:1;padding:9px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--fg);cursor:pointer;font:inherit;font-size:13px}
+.tabs button.on{background:var(--fg);color:var(--bg)}
+@media(max-width:760px){nav a.l{display:none}.hero{padding:40px 24px 28px;min-height:540px}.svc{grid-template-columns:34px 1fr 24px}.svc span.d{display:none}.stats{grid-template-columns:1fr}.stats div{border:0;border-top:1px solid var(--line);padding-left:0}.stats div:first-child{border:0}.gal img{height:320px}}
+
+/* ---- прайс ---- */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:22px 0 6px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:13px;color:var(--fg);text-decoration:none;transition:all .2s}
+.chips a:hover{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.cat{margin-top:56px}
+.cat-h{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.cat-h h3{font:400 clamp(20px,3vw,28px)/1.2 Unbounded,sans-serif;letter-spacing:-.03em;margin:0}
+.cat-h .n{margin-left:auto}
+.cat-note{color:var(--mute);font-size:13px;margin:0 0 4px}
+.row{display:grid;grid-template-columns:1fr auto;gap:8px 28px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line);transition:padding .25s}
+.row:hover{padding-left:12px}
+.row b{font-weight:400;font-size:16px;display:block}
+.row small{display:block;color:var(--mute);font-size:13px;margin-top:3px;line-height:1.45}
+.row .p{font:400 17px Unbounded,sans-serif;letter-spacing:-.02em;white-space:nowrap;text-align:right}
+.pnote{margin-top:48px;color:var(--mute);font-size:13px}
+/* ---- прайс: выпадающие списки ---- */
+.acc .svc em{font-size:18px}
+.acc .svc:hover em{transform:translateY(3px)}
+.acc.open .svc em,.acc.open .svc:hover em{transform:rotate(180deg)}
+.acc .svc:focus-visible,.row:focus-visible{outline:1px solid var(--fg);outline-offset:2px}
+.panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.acc.open .panel{grid-template-rows:1fr}
+.panel>.in{overflow:hidden;min-height:0}
+.panel .cat-note{padding:4px 0 0}
+.panel .row{cursor:pointer}
+.panel .row:last-child{border-bottom:0}
+.acc{border-bottom:1px solid var(--line)}
+.acc>.svc{border-bottom:0}
+.acc.open>.panel{padding-bottom:12px}
+/* ---- окно «позвонить» ---- */
+.box a.btn{text-decoration:none}
+.box .num{display:block;font:300 clamp(22px,6vw,28px)/1.2 Unbounded,sans-serif;letter-spacing:-.03em;color:var(--fg);text-decoration:none;margin:0 0 8px;white-space:nowrap}
+/* ---- запись + карта ---- */
+.book{display:grid;grid-template-columns:1fr 1.15fr;gap:32px;margin-top:32px;align-items:stretch}
+.form{border:1px solid var(--line);border-radius:22px;background:var(--pan);padding:32px}
+.form h3{font:300 26px Unbounded,sans-serif;letter-spacing:-.03em;margin:8px 0 20px}
+.form input,.form select,.form textarea{width:100%;padding:14px 4px;margin-bottom:10px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--fg);font:inherit;outline:0;border-radius:0;resize:none}
+.form input:focus,.form select:focus,.form textarea:focus{border-color:var(--fg)}
+.form select option{color:#000}
+.form .btn{width:100%;justify-content:center;margin-top:14px}
+.form .ok{display:none;padding:40px 0;text-align:center}.form .ok h3{margin:0 0 10px}
+.mapbox{border:1px solid var(--line);border-radius:22px;overflow:hidden;min-height:440px;position:relative;display:flex;flex-direction:column;background:var(--pan)}
+.mapbox iframe{border:0;width:100%;flex:1;min-height:380px;display:block}
+.mapbox .cap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:16px 22px;border-top:1px solid var(--line);font-size:14px}
+.mapbox .cap a{color:var(--fg)}
+@media(max-width:860px){.book{grid-template-columns:1fr}.row{grid-template-columns:1fr}.row .p{text-align:left}.form{padding:24px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="logo"><img src="images/logo.png" alt="">ИМПЛАНТ+</div>
+  <nav><a class="l" href="#services">Услуги</a><a class="l" href="#prices">Цены</a><a class="l" href="#doctors">Врачи</a><a class="l" href="#clinic">Клиника</a><a class="l" href="#contacts">Контакты</a>
+  <a href="#" onclick="openM('cab');return false">Кабинет</a>
+  <button class="btn" onclick="openM('rec')">Записаться</button></nav>
+</div></header>
+
+<main class="wrap">
+<div class="hero">
+  <div class="bg"></div><div class="scan"></div>
+  <span class="mono">Стоматологическая клиника</span>
+  <div><h1>ИМПЛАНТ<b>+</b><br>Улыбка<br>будущего</h1></div>
+  <div class="bot">
+    <p>Имплантация, протезирование и лечение кариеса и его осложнений. Современное оборудование и опытные врачи.</p>
+    <button class="btn" onclick="openM('rec')">Записаться на приём →</button>
+  </div>
+</div>
+
+<section id="services">
+  <div class="head"><h2>Услуги</h2><span class="mono">01 / Направления</span></div>
+  <div id="svc"></div>
+</section>
+
+
+<section id="prices">
+  <div class="head"><h2>Цены</h2><span class="mono">Прайс-лист</span></div>
+  <div id="pl"></div>
+  <p class="pnote">Все цены указаны в рублях. Точную стоимость лечения врач определит после осмотра и диагностики.</p>
+</section>
+
+<section id="doctors">
+  <div class="head"><h2>Врачи</h2><span class="mono">02 / Команда</span></div>
+  <div class="docs" id="docs"></div>
+</section>
+
+<section id="clinic">
+  <div class="head"><h2>Клиника</h2><span class="mono">03 / Интерьер</span></div>
+  <div class="gal"><img src="images/IMG_20261005_164121_136.jpg" alt=""><img src="images/IMG_20261005_164121_203.jpg" alt=""><img src="images/IMG_20261005_164120_667.jpg" alt=""><img src="images/IMG_20261005_164120_448.jpg" alt=""><img src="images/IMG_20261005_164121_158.jpg" alt=""></div>
+</section>
+
+<section id="booking">
+  <div class="head"><h2>Запись на приём</h2><span class="mono">04 / Как нас найти</span></div>
+  <div class="book">
+    <div class="form" id="bf">
+      <div id="bfBody">
+        <span class="mono">Онлайн-запись</span><h3>Оставьте заявку</h3>
+        <input id="bn" placeholder="Ваше имя" autocomplete="name">
+        <input id="bp" placeholder="Телефон" type="tel" autocomplete="tel">
+        <select id="bd"><option value="">Выберите врача</option></select>
+        <select id="bs"><option value="">Услуга (по желанию)</option></select>
+        <input id="bt" type="date">
+        <textarea id="bc" rows="2" placeholder="Комментарий (по желанию)"></textarea>
+        <button class="btn" onclick="sendBook()">Записаться →</button>
+        <p class="mono" style="margin:14px 0 0;text-transform:none;letter-spacing:.04em">Или позвоните: <a href="tel:+79184707455" style="color:var(--fg)">+7 (918) 470-74-55</a></p>
+      </div>
+      <div class="ok" id="bfOk"><h3>Спасибо!</h3><p>Заявка принята. Мы перезвоним вам в ближайшее время.</p></div>
+    </div>
+    <div class="mapbox">
+      <iframe src="https://yandex.ru/map-widget/v1/?ll=37.331620%2C44.873187&z=16&pt=37.331620,44.873187,pm2rdl&l=map" title="Карта: Имплант +, Анапа, ул. Ленина, 187" loading="lazy" allowfullscreen></iframe>
+      <div class="cap"><span>г. Анапа, ул. Ленина, 187 · есть парковка</span><a href="https://yandex.ru/maps/-/CXE442YG" target="_blank" rel="noopener">Открыть в Яндекс Картах →</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="contacts"><div class="wrap">
+  <div class="big">Запишитесь<br>на приём</div>
+  <div class="cols">
+    <div><span class="mono">Адрес</span><div>г. Анапа, ул. Ленина, 187</div><div style="opacity:.6">Пн–Сб 09:00–18:00<br>Вс — выходной</div></div>
+    <div><span class="mono">Телефон</span><a href="tel:+79184707455">+7 (918) 470-74-55</a></div>
+    <div><span class="mono">Соцсети</span><a href="#">Telegram</a><a href="#">VK</a><a href="#">WhatsApp</a></div>
+  </div>
+  <div class="copy mono">© 2026 ИМПЛАНТ+ · Стоматологическая клиника</div>
+</div></footer>
+
+<div class="modal" id="rec" onclick="if(event.target===this)closeM()"><div class="box">
+  <button class="x" onclick="closeM()">×</button>
+  <span class="mono">Запись</span><h3>Запись на приём</h3>
+  <a class="num" href="tel:+79184707455">+7 (918) 470-74-55</a>
+  <a class="btn" href="tel:+79184707455">Позвонить</a>
+</div></div>
+
+<div class="modal" id="cab" onclick="if(event.target===this)closeM()"><div class="box">
+  <button class="x" onclick="closeM()">×</button>
+  <span class="mono">Кабинет</span><h3>Личный кабинет</h3>
+  <div class="tabs"><button class="on" id="t1" onclick="tab(1)">Вход</button><button id="t2" onclick="tab(2)">Регистрация</button></div>
+  <input id="nm" placeholder="Ваше имя" style="display:none"><input placeholder="Телефон или email"><input placeholder="Пароль" type="password">
+  <button class="btn" onclick="done('Это макет: вход подключит разработчик.')">Продолжить</button>
+</div></div>
+
+<script>
+var D=[["Кысса Андрей Петрович","Врач-стоматолог, хирург-имплантолог, ортопед","Стаж 10 лет. Регулярно обучается в сфере стоматологии.","images/IMG_20261005_192237_470.jpg"],["Кысса Виктор Петрович","Врач-стоматолог общей практики","Стаж более 3 лет. Осваивает передовые технологии.","images/IMG_20261005_194751_167.jpg"]];
+var S=[["Имплантация","Восстановление утраченных зубов"],["Протезирование","Коронки и ортопедические конструкции"],["Лечение кариеса","Кариес и его осложнения"]];
+var g=document.getElementById('docs'),v=document.getElementById('svc');
+D.forEach(function(d,i){
+  g.innerHTML+='<div class="doc" onclick="openM(\'rec\','+i+')"><img src="'+d[3]+'" alt=""><div><span class="mono">0'+(i+1)+'</span><h3>'+d[0]+'</h3><p>'+d[1]+'</p><p style="margin-top:8px">'+d[2]+'</p></div></div>';
+});
+S.forEach(function(x,i){
+  v.innerHTML+='<div class="svc" onclick="openM(\'rec\')"><span class="mono">0'+(i+1)+'</span><h3>'+x[0]+'</h3><span class="d">'+x[1]+'</span><em>→</em></div>';
+});
+
+var P=[
+["implants","Имплантация","",[
+["Синуслифтинг закрытый","",15000],
+["Синуслифтинг открытый","с учётом стоимости костного материала",45000],
+["Внутрикостная дентальная имплантация","Имплантат NEOBIOTECH — Южная Корея",23000],
+["Внутрикостная дентальная имплантация","Имплантат LENMIRIOT — Россия",20000],
+["Внутрикостная дентальная имплантация","Имплантат NEODENT — Бразилия, Швейцария",27000],
+["Имплантация «всё на 4х»","с временной конструкцией",199000],
+["Имплантация «всё на 6 ти»","с временной конструкцией",229000]]],
+["ortho","Ортопедические работы","",[
+["Циркониевая коронка на зуб","",15000],
+["Коронка на диоксиде циркония на имплантат","",21500],
+["Коронка металлокерамическая на имплантат","",19500],
+["Коронка металлокерамическая на зуб","",12500],
+["Временная коронка на имплантат","из PMMA, композит",8500],
+["Протезирование «всё на 4х» имплантатах","12 ед., металлокерамика",199000],
+["Протезирование «всё на 6 ти» имплантатах","14 ед., металлокерамика",219000],
+["Протезирование «всё на 4х» имплантатах","12 ед., диоксид циркония",249000],
+["Протезирование «всё на 6 ти» имплантатах","14 ед., диоксид циркония",269000]]],
+["therapy","Терапевтическая помощь","Реставрация из фотополимера 5-го поколения «Gradia», без анестезии",[
+["Лечение кариеса, реставрация","одна поверхность",3500],
+["Лечение кариеса, реставрация","две поверхности",4000],
+["Лечение кариеса, реставрация","три поверхности",4500]]],
+["surgery","Хирургическая помощь","",[
+["Вскрытие абсцесса, разрез","",2000],
+["Удаление подвижного зуба","",2000],
+["Удаление постоянного зуба 1-корневого","",3000],
+["Удаление корня зуба","",3500],
+["Удаление 8-х зубов на верхней челюсти","",3500],
+["Удаление зуба мудрости на нижней челюсти","Удаление 8-х зубов на нижней челюсти",4500],
+["Удаление 2-х, 3-х корневых зубов","",4500],
+["Удаление ретинированного зуба","",6000]]],
+["hygiene","Профгигиена. Отбеливание","",[
+["Гигиена","осмотр, снятие зубных отложений ультразвуком, чистка межзубных промежутков · 1-я челюсть",1000],
+["Гигиена","осмотр, снятие зубных отложений ультразвуком, чистка межзубных промежутков · 2 челюсти",2000],
+["Чистка ультразвуком","1 зуб",200],
+["Чистка профессиональными пастами","1 зуб",150],
+["Чистка профессиональными пастами","1-я челюсть",1000],
+["Чистка профессиональными пастами","2 челюсти",1500],
+["Чистка системой «AIR-FLOW»","1 зуб",150],
+["Чистка системой «AIR-FLOW»","1-я челюсть",1000],
+["Чистка системой «AIR-FLOW»","2 челюсти",2000],
+["Покрытие фторлаком","1 зуб",150],
+["Покрытие фторлаком","1-я челюсть",1000],
+["Покрытие фторлаком","2 челюсти",2000]]],
+["laser","Лазерная стоматология","",[
+["Пластика уздечки верхней губы","",5000],
+["Пластика уздечки нижней губы","",5000],
+["Иссечение тяжей лазером","",5000]]],
+["general","Общие услуги для медицинского приёма","",[
+["Справка о санации полости рта","",500],
+["Электроодонтометрия","",350],
+["Ортопантомограмма (ОПТГ)","",1500],
+["Исследование КЛКТ (3D диагностика)","Конусно-лучевая компьютерная томография",2500],
+["Аппликационная анестезия","",100],
+["Проводниковая анестезия","Артикаин 4% Инибса с эпинефрином 1:100 000",400],
+["Инфильтрационная анестезия","Артикаин 4% Инибса с эпинефрином 1:100 000",400]]]
+];
+function fmt(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0')+'\u00a0₽'}
+(function(){
+  var pl=document.getElementById('pl'),bs=document.getElementById('bs'),bd=document.getElementById('bd'),out='';
+  P.forEach(function(c,i){
+    var n=c[3].length;
+    var h='<div class="acc" id="c-'+c[0]+'"><div class="svc" role="button" tabindex="0" aria-expanded="false" onclick="tgl(this)"><span class="mono">0'+(i+1)+'</span><h3>'+c[1]+'</h3><span class="d">'+n+' поз.</span><em>↓</em></div><div class="panel"><div class="in">';
+    if(c[2])h+='<p class="cat-note">'+c[2]+'</p>';
+    c[3].forEach(function(r){h+='<div class="row" role="button" tabindex="0" onclick="openM(\'rec\')"><div><b>'+r[0]+'</b>'+(r[1]?'<small>'+r[1]+'</small>':'')+'</div><div class="p">'+fmt(r[2])+'</div></div>'});
+    out+=h+'</div></div></div>';
+    bs.innerHTML+='<option>'+c[1]+'</option>';
+  });
+  pl.innerHTML=out;
+  D.forEach(function(d,i){bd.innerHTML+='<option value="'+i+'">'+d[0]+'</option>'});
+})();
+function tgl(el){var a=el.parentNode,o=a.classList.toggle('open');el.setAttribute('aria-expanded',o)}
+document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.getAttribute&&e.target.getAttribute('role')==='button'){e.preventDefault();e.target.click()}});
+function sendBook(){
+  var n=document.getElementById('bn').value.trim(),p=document.getElementById('bp').value.trim();
+  if(!n||p.replace(/\D/g,'').length<10){alert('Укажите имя и телефон, чтобы мы могли вам перезвонить.');return}
+  document.getElementById('bfBody').style.display='none';document.getElementById('bfOk').style.display='block';
+}
+function openM(id){document.getElementById(id).classList.add('open')}
+function closeM(){document.querySelectorAll('.modal').forEach(function(m){m.classList.remove('open')})}
+function done(t){alert(t);closeM()}
+function tab(n){document.getElementById('t1').className=n==1?'on':'';document.getElementById('t2').className=n==2?'on':'';document.getElementById('nm').style.display=n==2?'block':'none'}
+</script>
+</body>
+</html>

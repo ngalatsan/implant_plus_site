@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ИМПЛАНТ+ — стоматологическая клиника в Анапе. Имплантация, протезирование, лечение зубов. Врачи, услуги и цены. Ул. Ленина, 187. Запись: +7 (918) 470-74-55." />
+    <title>ИМПЛАНТ+ — стоматологическая клиника в Анапе</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <script>
+      try {
+        var theme = localStorage.getItem('implant-theme');
+        document.documentElement.classList.toggle('dark', theme === 'dark' || (!theme && matchMedia('(prefers-color-scheme: dark)').matches));
+      } catch (_) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>ИМПЛАНТ+ — стоматологическая клиника. Анапа, ул. Ленина, 187. Пн–Сб 09:00–18:00. Запись по телефону: <a href="tel:+79184707455">+7 (918) 470-74-55</a>. Для просмотра полного сайта включите JavaScript.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
