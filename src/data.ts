@@ -26,19 +26,19 @@ export const doctors = [
     name: 'Кысса Андрей Петрович',
     surname: 'Кысса',
     firstName: 'Андрей Петрович',
-    role: 'Врач-стоматолог, хирург-имплантолог, ортопед',
-    experience: 'Стаж 10 лет',
-    description: 'Регулярно обучается в сфере стоматологии.',
-    photo: '/images/IMG_20261005_192237_470.jpg',
+    role: 'Врач стоматолог хирург-имплантолог, ортопед',
+    experience: 'Стаж работы 10 лет',
+    description: 'Опытный специалист, регулярно обучающийся в сфере стоматологии.',
+    photo: '/images/doc1_andrey.jpg',
   },
   {
     name: 'Кысса Виктор Петрович',
     surname: 'Кысса',
     firstName: 'Виктор Петрович',
-    role: 'Врач-стоматолог общей практики',
-    experience: 'Стаж более 3 лет',
-    description: 'Осваивает передовые технологии.',
-    photo: '/images/IMG_20261005_194751_167.jpg',
+    role: 'Врач стоматолог общей практики',
+    experience: 'Стаж работы более 3х лет',
+    description: 'Перспективный специалист, регулярно обучающийся самым передовым технологиям в сфере стоматологии.',
+    photo: '/images/doc2_viktor.jpg',
   },
 ];
 
@@ -49,11 +49,12 @@ export const services = [
 ];
 
 export const gallery = [
-  { src: '/images/IMG_20261005_164121_203.jpg', title: 'Зона ожидания' },
-  { src: '/images/IMG_20261005_164121_136.jpg', title: 'Пространство клиники' },
-  { src: '/images/IMG_20261005_164120_448.jpg', title: 'Стоматологический кабинет' },
-  { src: '/images/IMG_20261005_164120_667.jpg', title: 'Оснащение кабинета' },
-  { src: '/images/IMG_20261005_164121_158.jpg', title: 'Кабинет для приёма' },
+  { src: '/images/IMG_1.jpg', title: 'Зона ожидания' },
+  { src: '/images/IMG_3.jpg', title: 'Пространство клиники' },
+  { src: '/images/IMG_2.jpg', title: 'Приёмная и интерьер клиники' },
+  { src: '/images/IMG_4.jpg', title: 'Стоматологический кабинет' },
+  { src: '/images/IMG_6.jpg', title: 'Оснащение кабинета' },
+  { src: '/images/IMG_5.jpg', title: 'Кабинет для приёма' },
 ];
 
 export { prices };

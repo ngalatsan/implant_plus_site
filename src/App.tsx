@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Menu, Moon, Sun, Phone, MessageCircle, MapPin } from 'lucide-react';
+import { Menu, Moon, Sun, Phone, MessageCircle, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -10,6 +10,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { clinic, doctors, formatPrice, gallery, navigation, prices, services } from '@/data';
 import { cn } from '@/lib/utils';
 
@@ -41,6 +42,54 @@ function App() {
   const [selectedDoctor, setSelectedDoctor] = useState<string | null>(null);
   const [openPrices, setOpenPrices] = useState<string[]>([]);
   const bookingFocus = useRef<HTMLButtonElement | null>(null);
+  const galleryRef = useRef<HTMLDivElement | null>(null);
+  const [galleryEdges, setGalleryEdges] = useState({ start: true, end: false });
+
+  useEffect(() => {
+    const viewport = galleryRef.current?.querySelector<HTMLElement>('[data-slot="scroll-area-viewport"]');
+    if (!viewport) return;
+    const update = () => setGalleryEdges({ start: viewport.scrollLeft <= 1, end: viewport.scrollLeft + viewport.clientWidth >= viewport.scrollWidth - 1 });
+    const resize = new ResizeObserver(update);
+    resize.observe(viewport);
+    viewport.addEventListener('scroll', update, { passive: true });
+    update();
+    return () => { resize.disconnect(); viewport.removeEventListener('scroll', update); };
+  }, []);
+
+  function scrollGallery(direction: number) {
+    const viewport = galleryRef.current?.querySelector<HTMLElement>('[data-slot="scroll-area-viewport"]');
+    const photos = galleryRef.current?.querySelector<HTMLElement>('.gallery-grid');
+    if (!viewport || !photos?.firstElementChild) return;
+    const step = photos.firstElementChild.getBoundingClientRect().width + parseFloat(getComputedStyle(photos).columnGap);
+    viewport.scrollBy({ left: direction * step, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+  }
+
+  useEffect(() => {
+    const media = matchMedia('(prefers-reduced-motion: reduce)');
+    const elements = document.querySelectorAll<HTMLElement>('.section-heading, .about-grid, .facts, .service-grid > [data-slot="card"], .doctor-card, .gallery-grid > figure, .contacts-grid > [data-slot="card"]');
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else if (entry.boundingClientRect.top >= innerHeight) {
+          entry.target.classList.remove('is-visible');
+        }
+      }
+    }, { threshold: 0.12 });
+    for (const element of elements) {
+      element.classList.add('scroll-reveal');
+      if (media.matches) element.classList.add('is-visible');
+      else observer.observe(element);
+    }
+    const reduceMotion = () => {
+      if (media.matches) {
+        elements.forEach(element => element.classList.add('is-visible'));
+        observer.disconnect();
+      }
+    };
+    media.addEventListener('change', reduceMotion);
+    return () => { observer.disconnect(); media.removeEventListener('change', reduceMotion); };
+  }, []);
 
   function selectDoctor(doctor: string | null, trigger: HTMLButtonElement) {
     bookingFocus.current = trigger;
@@ -93,14 +142,15 @@ function App() {
       </div>
     </header>
 
-    <main id="main" className="container">
+    <main id="main">
       <section className="hero inverse-surface" id="home" aria-labelledby="hero-title">
-        <img className="hero-image" src="/images/IMG_20261005_164121_254.jpg" alt="Стоматологический кабинет клиники ИМПЛАНТ+" fetchPriority="high" width="720" height="1280" />
+        <img className="hero-image" src="/images/main_photo.jpg" alt="Стоматологический кабинет клиники ИМПЛАНТ+" fetchPriority="high" width="720" height="1280" />
         <div className="hero-top"><span className="eyebrow">Стоматологическая клиника</span><span className="eyebrow">Анапа · Ленина, 187</span></div>
-        <h1 id="hero-title"><span className="hero-name">ИМПЛАНТ+</span>Улыбка<br />будущего</h1>
+        <h1 id="hero-title"><span className="hero-name">ИМПЛАНТ+</span><span className="hero-tagline">Улыбка будущего</span></h1>
         <div className="hero-bottom"><p>Имплантация, протезирование и лечение зубов. Современное оборудование и опытные врачи — в одной клинике.</p><div className="hero-actions"><BookingButton onSelect={selectDoctor} size="lg">Записаться на приём</BookingButton><span className="eyebrow">{clinic.hours}</span></div></div>
       </section>
 
+      <div className="container">
       <section className="section" id="about" aria-label="О клинике">
         <SectionHeading title="Забота о вашей улыбке" label="01 / О клинике" />
         <div className="about-grid"><p className="intro-copy">От лечения зубов до восстановления улыбки — поможем разобраться, с чего начать.</p><div className="body-copy"><p>ИМПЛАНТ+ — стоматологическая клиника в Анапе. Занимаемся лечением кариеса и его осложнений, имплантацией и протезированием.</p><p>В клинике также доступны хирургическая помощь, профессиональная гигиена, лазерная стоматология и диагностика. На приёме врач определит необходимое лечение и его стоимость.</p></div></div>
@@ -144,9 +194,10 @@ function App() {
       </section>
 
       <section className="section" id="clinic" aria-label="Интерьер клиники">
-        <SectionHeading title="Внутри клиники" label="04 / Пространство" />
+        <SectionHeading title="Клиника" label="04 / Пространство" />
         <p className="section-copy">Зона ожидания и кабинеты ИМПЛАНТ+. Посмотрите, где проходит приём.</p>
-        <div className="gallery-grid">{gallery.map(photo => <figure key={photo.src}><AspectRatio ratio={3 / 4}><img src={photo.src} alt={photo.title} loading="lazy" width="720" height="960" /></AspectRatio><figcaption>{photo.title}</figcaption></figure>)}</div>
+        <div className="gallery-controls"><Button variant="outline" size="icon" aria-label="Предыдущие фотографии" aria-controls="clinic-gallery" disabled={galleryEdges.start} onClick={() => scrollGallery(-1)}><ChevronLeft /></Button><Button variant="outline" size="icon" aria-label="Следующие фотографии" aria-controls="clinic-gallery" disabled={galleryEdges.end} onClick={() => scrollGallery(1)}><ChevronRight /></Button></div>
+        <ScrollArea ref={galleryRef} id="clinic-gallery" className="gallery-scroll" type="always" aria-label="Фотографии клиники"><div className="gallery-grid">{gallery.map(photo => <figure key={photo.src}><AspectRatio ratio={3 / 4}><img src={photo.src} alt={photo.title} loading="lazy" width="720" height="960" /></AspectRatio></figure>)}</div><ScrollBar orientation="horizontal" /></ScrollArea>
       </section>
 
       <section className="section" id="contacts" aria-label="Контакты и запись">
@@ -159,6 +210,7 @@ function App() {
         <Card className="map-card"><CardHeader className="sr-only"><CardTitle>Как найти клинику</CardTitle><CardDescription>{clinic.address}</CardDescription></CardHeader><CardContent className="map-content"><iframe src={clinic.mapEmbed} title="Карта: ИМПЛАНТ+, Анапа, улица Ленина, 187" loading="lazy" allowFullScreen /></CardContent><CardFooter className="map-footer"><span>{clinic.address}</span><Button variant="link" asChild><a href={clinic.maps} target="_blank" rel="noopener noreferrer"><MapPin data-icon="inline-start" />Открыть карту</a></Button></CardFooter></Card>
         </div>
       </section>
+      </div>
     </main>
 
     <footer className="footer inverse-surface"><div className="container"><div className="footer-top"><h2>Ваша улыбка.<br />Наше внимание.</h2><Brand /></div><Separator /><div className="footer-bottom"><p>© 2026 ИМПЛАНТ+ · Стоматологическая клиника</p><a href={clinic.maps} target="_blank" rel="noopener noreferrer">Мы в Яндекс Картах</a></div><p className="footer-note">Имеются противопоказания. Необходима консультация специалиста.</p></div></footer>
