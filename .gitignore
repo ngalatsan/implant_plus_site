@@ -1,5 +1,4 @@
 node_modules/
-dist/
 .tools/
 .verification/
 reference/yandex.html
